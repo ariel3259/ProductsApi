@@ -1,7 +1,6 @@
 package com.ariel.ProductsApi.Services;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +12,7 @@ import com.ariel.ProductsApi.Abstractions.GenericRepository;
 import com.ariel.ProductsApi.Abstractions.PageResponse;
 import com.ariel.ProductsApi.Model.Products;
 import com.ariel.ProductsApi.Pojo.ProductsPageResponse;
+import com.ariel.ProductsApi.Pojo.ProductsRequest;
 import com.ariel.ProductsApi.Pojo.ProductsResponse;
 
 @Service()
@@ -32,5 +32,11 @@ public class ProductsService {
             })
             .toList();
         return new ProductsPageResponse(productsResponse, count);
-    } 
+    }
+
+    public ProductsResponse save(ProductsRequest request) {
+        Products productToSave = new Products(request.getName(), request.getPrice(), request.getStock(), "Ariel", "Ariel", true);
+        Products productSaved = this.productsRepository.save(productToSave);
+        return new ProductsResponse(productSaved.getId(), productSaved.getName(), productSaved.getPrice(), productSaved.getStock());
+    }
 }
