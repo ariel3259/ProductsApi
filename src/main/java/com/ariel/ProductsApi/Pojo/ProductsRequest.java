@@ -1,19 +1,20 @@
 package com.ariel.ProductsApi.Pojo;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
 @Getter
-@Schema
 public class ProductsRequest {
+    @Schema(required=true)
     @NotBlank(message="Name is mandatory")
-    @Schema(required=true)
     private String name;
-    @NotNull(message="Price is mandatory")
+    
     @Schema(required=true)
+    @Min(value=1,message="Price is mandatory")
     private double price;
-    @NotNull(message="stock is mandatory")
+    
     @Schema(required=true)
+    @Min(value=1,message="stock is mandatory")
     private int stock;
 }
