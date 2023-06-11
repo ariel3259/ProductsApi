@@ -1,7 +1,6 @@
 package com.ariel.ProductsApi.Abstractions;
 
 import java.sql.Date;
-
 import org.springframework.data.annotation.CreatedBy;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
